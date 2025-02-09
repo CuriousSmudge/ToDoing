@@ -11,8 +11,10 @@
 
 
 	<body>
-		<img src="images/login-background.jpg">
+		<img src="{{ url_for('static', filename='images/login-background.jpg') }}" class="image" />
 
 		<h1>Welcome to ToDoing</h1>
+		<input type="text" placeholder="Username...">
+		<input type="text" placeholder="Password...">
 	</body>
 </html>
