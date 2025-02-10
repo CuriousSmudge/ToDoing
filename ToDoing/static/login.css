@@ -1,0 +1,49 @@
+html, body {
+	margin: 0;
+	height: 100%;
+	overflow: hidden
+}
+
+h1 {
+	font-family: "Gloock";
+	color: #4c4f69;
+}
+
+::placeholder {
+	font-family: "JetBrains Mono";
+	font-style: italic;
+	color: #6c6f85; 
+	opacity: 1;
+}
+
+.login-input {
+	padding: 4%;
+	border-radius: 28px;
+	background-color: #9ca0b0;
+	border: none;
+	margin: 3%;
+}
+
+#background-image {
+	background-image: url("/static/images/login-background.jpg");
+	background-repeat: no-repeat;
+	filter: blur(8px) brightness(60%);
+	width: 100vw;
+	height: 100vh;
+	background-position: center;
+	background-size: cover;
+}
+
+.poppup {
+	filter: blur(0px);
+	width: 20vw;
+	height: 25vh;
+	background-color: #dce0e8;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	text-align: center;
+	padding: 1vh;
+	border-radius: 28px;
+}

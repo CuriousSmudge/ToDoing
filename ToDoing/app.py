@@ -10,5 +10,11 @@ def index():
 def login():
     return render_template('login.html')
 
+@app.route('/login.css')
+def serve_login_css():
+    with open('static/login.css') as file:
+        data = file.read()
+    return data
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

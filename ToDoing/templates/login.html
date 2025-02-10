@@ -2,19 +2,25 @@
 <html>
 	<head>
 		<title>ToDoing</title>
-		<link rel="stylesheet" href="login.css">
+		<link rel="stylesheet" href="{{ url_for('static', filename='/login.css') }}">
 		
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet"
+		<link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 	</head>
 
 
 	<body>
-		<img src="{{ url_for('static', filename='images/login-background.jpg') }}" class="image" />
+		<div id="background-image">
+			<!--<img src="{{ url_for('static', filename='images/login-background.jpg') }}" class="background" />-->
+		</div>
 
-		<h1>Welcome to ToDoing</h1>
-		<input type="text" placeholder="Username...">
-		<input type="text" placeholder="Password...">
+		<div class="poppup">
+				<h1>Welcome to ToDoing</h1>
+				<input type="text" placeholder="Username..." class="login-input">
+				<br>
+				<input type="text" placeholder="Password..." class="login-input">
+		</div>
 	</body>
 </html>
