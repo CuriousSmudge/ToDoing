@@ -17,10 +17,13 @@
 		</div>
 
 		<div class="poppup">
-				<h1>Welcome to ToDoing</h1>
-				<input type="text" placeholder="Username..." class="login-input">
-				<br>
-				<input type="text" placeholder="Password..." class="login-input">
+			<h1>Welcome to ToDoing</h1>
+			<h2>Login</h2>
+			<form action="/login" method="post">
+				<input type="text" placeholder="Username..." class="login-input" id="user" name="user" value=""><br>
+				<input type="text" placeholder="Password..." class="login-input" id="pass" name="pass" value=""><br><br>
+				<input type="submit" value="Submit">
+			</form>
 		</div>
 	</body>
 </html>

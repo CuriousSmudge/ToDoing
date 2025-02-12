@@ -4,9 +4,14 @@ html, body {
 	overflow: hidden
 }
 
-h1 {
+h1, h2 {
 	font-family: "Gloock";
 	color: #4c4f69;
+	font-size: 58px;
+}
+
+h2 {
+	font-size: 32px;	
 }
 
 ::placeholder {
@@ -36,8 +41,8 @@ h1 {
 
 .poppup {
 	filter: blur(0px);
-	width: 20vw;
-	height: 25vh;
+	width: 22vw;
+	height: 45vh;
 	background-color: #dce0e8;
 	position: absolute;
 	top: 50%;
