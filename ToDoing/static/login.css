@@ -1,3 +1,9 @@
+/* Colour Vars */
+:root {
+	--text: #4c4f69;
+	--subtext0: #6c6f85;
+}
+
 html, body {
 	margin: 0;
 	height: 100%;
@@ -6,8 +12,9 @@ html, body {
 
 h1, h2 {
 	font-family: "Gloock";
-	color: #4c4f69;
-	font-size: 58px;
+	color: var(--text);
+	font-size: 46px;
+	margin: 10px;
 }
 
 h2 {
@@ -17,7 +24,7 @@ h2 {
 ::placeholder {
 	font-family: "JetBrains Mono";
 	font-style: italic;
-	color: #6c6f85; 
+	color: var(--subtext0); 
 	opacity: 1;
 }
 
@@ -27,6 +34,9 @@ h2 {
 	background-color: #9ca0b0;
 	border: none;
 	margin: 3%;
+	width: 11vw;
+	font-family: "JetBrains Mono";
+	color: var(--text); 
 }
 
 #background-image {
@@ -41,8 +51,8 @@ h2 {
 
 .poppup {
 	filter: blur(0px);
-	width: 22vw;
-	height: 45vh;
+	width: 16vw;
+	height: 35vh;
 	background-color: #dce0e8;
 	position: absolute;
 	top: 50%;
