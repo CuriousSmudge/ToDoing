@@ -6,6 +6,14 @@ app = Flask(__name__, template_folder='templates')
 def index():
     return render_template('index.html')
 
+@app.route('/manifest.json')
+def serve_manifest():
+    return send_file('manifest.json', mimetype='application/manifest+json')
+
+@app.route('/sw.js')
+def serve_sw():
+    return send_file('sw.js', mimetype='application/javascript')
+
 @app.route('/login')
 def login():
     return render_template('login.html')
