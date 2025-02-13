@@ -6,4 +6,13 @@
  "display": "standalone",
  "theme_color": "#317EFB",
  "background_color": "#317EFB",
+ "icons":[
+	 {
+		 "src": "/static/icons/disney.png",
+		 "sizes": "512x512",
+		 "type": "image/png",
+		 "purpose": "any maskable"
+	 }
+ ]
 }
+
