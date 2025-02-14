@@ -34,7 +34,7 @@ h2 {
 	background-color: #9ca0b0;
 	border: none;
 	margin: 3%;
-	width: 11vw;
+	width: 70%;
 	font-family: "JetBrains Mono";
 	color: var(--text); 
 }
@@ -51,8 +51,8 @@ h2 {
 
 .poppup {
 	filter: blur(0px);
-	width: 16vw;
-	height: 35vh;
+	width: 340px;
+	height: 420px;
 	background-color: #dce0e8;
 	position: absolute;
 	top: 50%;
