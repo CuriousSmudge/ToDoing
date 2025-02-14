@@ -1,4 +1,5 @@
-from flask import Flask, render_template 
+from flask import Flask, render_template, request 
+import database
 
 app = Flask(__name__, template_folder='templates')
 
@@ -14,9 +15,16 @@ def serve_manifest():
 def serve_sw():
     return send_file('sw.js', mimetype='application/javascript')
 
-@app.route('/login')
+@app.route('/login', methods=['POST', 'GET'])
 def login():
-    return render_template('login.html')
+    if request.method=='POST':
+        username = request.form['username']
+        password = request.form['password']
+        database.insertUser(username, password)
+        users = database.retrieveUsers()
+        return render_template('login.html', users=users)
+    else:
+        return render_template('login.html')
 
 @app.route('/login.css')
 def serve_login_css():
