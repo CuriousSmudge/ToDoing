@@ -1,4 +1,11 @@
 import sqlite3 as sql
+from dataclasses import dataclass
+
+@dataclass
+class User():
+    username: str
+    password: str
+
 
 def insertUser(username,password):
     con = sql.connect("database.db")
