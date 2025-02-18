@@ -17,9 +17,7 @@ def login(username, password):
 
 def signup(username, password):
     if check_username_available(username) == True:
-        cur.execute("""INSERT INTO users VALUES (?,?)""",)
-                        (username), (password)
-                        )
+        cur.execute("""INSERT INTO users VALUES (username,password)""")
         con.commit()
         con.close()
         return "Account Created"
