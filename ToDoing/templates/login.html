@@ -3,7 +3,8 @@
 	<head>
 		<title>ToDoing</title>
 		<link rel="stylesheet" href="{{ url_for('static', filename='/login.css') }}">
-		
+		<script src="{{ url_for('static', filename='login.js')}}"></script>
+
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
@@ -16,6 +17,11 @@
 			<!--<img src="{{ url_for('static', filename='images/login-background.jpg') }}" class="background" />-->
 		</div>
 
+		<div class="tab">
+			<button class="tablinks" onclick="switch_entry(event, 'Login')">Login</button>
+			<button class="tablinks" onclick="switch_entry(event, 'SignUp')">Sign Up</button>
+		</div>
+
 		<div class="poppup">
 			<h1>Welcome to ToDoing</h1>
 			<h2>Login</h2>
@@ -24,6 +30,14 @@
 				<input type="password" placeholder="Password..." class="login-input" id="pass" name="password" value=""><br><br>
 				<input type="submit" value="Submit" class="login-input" id="submit">
 			</form>
+		</div>
+
+		<div id="Login" class="tabcontent">
+			...
+		</div>
+
+		<div id="Sign Up" class="tabcontent">
+			...
 		</div>
 	</body>
 </html>
