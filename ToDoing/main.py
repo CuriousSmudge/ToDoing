@@ -1,12 +1,7 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, send_file, request
 import database
 
-
-database.login("baslls", "penis")
-
 app = Flask(__name__, template_folder="templates")
-
-# Hint. I would move signup and auth things to a new file
 
 
 @app.route("/")
@@ -24,27 +19,35 @@ def serve_sw():
     return send_file("sw.js", mimetype="application/javascript")
 
 
+@app.route("/login.css")
+def serve_login_css():
+    # Hint. Use Send file here
+    with open("static/login.css") as file:
+        data = file.read()
+    return data
+
+
 @app.route("/login", methods=["POST", "GET"])
 def login():
-    # hint. Have a seperate endpoint for sign up
-
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
-        database.signup(username, password)
+        signup(username, password)
         users = database.retrieveUsers()
         return render_template("login.html", users=users)
     else:
         return render_template("login.html")
 
 
-@app.route("/login.css")
-def serve_login_css():
-    # Hint. Use Send file here
-
-    with open("static/login.css") as file:
-        data = file.read()
-    return data
+@app.route("/signup", methods=["POST"])
+def signup(username: str, password: str) -> str:
+    username = request.form["username"]
+    password = request.form["password"]
+    if database.check_username_available(username):
+        database.insertUser(username, password)
+        return "Account Created"
+    else:
+        return "Account Creation Failed"
 
 
 if __name__ == "__main__":
