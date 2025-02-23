@@ -13,31 +13,34 @@
 
 
 	<body>
-		<div id="background-image">
-			<!--<img src="{{ url_for('static', filename='images/login-background.jpg') }}" class="background" />-->
-		</div>
-
-		<div class="tab">
-			<button class="tablinks" onclick="switch_entry(event, 'Login')">Login</button>
-			<button class="tablinks" onclick="switch_entry(event, 'SignUp')">Sign Up</button>
-		</div>
-
+		<div id="background-image"> </div>
+		
 		<div class="poppup">
 			<h1>Welcome to ToDoing</h1>
-			<h2>Login</h2>
-			<form action="/login" method="post">
-				<input type="text" placeholder="Username..." class="login-input" id="user" name="username" value=""><br>
-				<input type="password" placeholder="Password..." class="login-input" id="pass" name="password" value=""><br><br>
-				<input type="submit" value="Submit" class="login-input" id="submit">
-			</form>
-		</div>
+			
+			<div class"tab">
+				<button class="tablinks" onclick="switch_entry(event, 'Login')">Login</button>
+				<button class="tablinks" onclick="switch_entry(event, 'SignUp')">Sign Up</button>
+			</div>
 
-		<div id="Login" class="tabcontent">
-			...
-		</div>
+			<div id="Login" class="tabcontent" style="display: block;">
+				<h2>Login</h2>
+				<form action="/login" method="post">
+					<input type="text" placeholder="Username..." class="login-input" id="user" name="username" value=""><br>
+					<input type="password" placeholder="Password..." class="login-input" id="pass" name="password" value=""><br>
+					<input type="submit" value="Submit" class="login-input" id="submit">
+				</form>
 
-		<div id="Sign Up" class="tabcontent">
-			...
+			</div>
+
+			<div id="SignUp" class="tabcontent">
+				<h2>Sign Up</h2>
+				<form action="/login" method="post">
+					<input type="text" placeholder="Username..." class="login-input" id="user" name="username" value=""><br>
+					<input type="password" placeholder="Password..." class="login-input" id="pass" name="password" value=""><br>
+					<input type="submit" value="Sign Up" class="login-input" id="submit">
+				</form>
+			</div>
 		</div>
 	</body>
 </html>

@@ -6,6 +6,8 @@ database.login("baslls", "penis")
 
 app = Flask(__name__, template_folder="templates")
 
+# Hint. I would move signup and auth things to a new file
+
 
 @app.route("/")
 def index():
@@ -24,6 +26,8 @@ def serve_sw():
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
+    # hint. Have a seperate endpoint for sign up
+
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -36,6 +40,8 @@ def login():
 
 @app.route("/login.css")
 def serve_login_css():
+    # Hint. Use Send file here
+
     with open("static/login.css") as file:
         data = file.read()
     return data

@@ -25,14 +25,6 @@ h2 {
 	overflow: hidden;
 }
 
-.tab button {
-	float: left;
-	border: none;
-	outline: none;
-	cursor: pointer;
-	transition: 0.3s;
-}
-
 .tab button.active {
 	background-color: #ccc;
 }

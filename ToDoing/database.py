@@ -12,10 +12,12 @@ class User:
     password: str
 
 
-def login(username, password): ...
+def login(username, password):
+    pass
 
 
-def signup(username: str, password: str):
+# Hint. Shouldnt this be in app.py? (then it can be a flask endpoint)
+def signup(username: str, password: str) -> str:
     if check_username_available(username):
         insertUser(username, password)
         return "Account Created"
@@ -35,6 +37,7 @@ def check_username_available(username):
 def insertUser(username, password):
     con = sql.connect("database.db")
     cur = con.cursor()
+    # Hint. Use the above function
     cur.execute(
         "INSERT INTO users (username,password) VALUES (?,?)", (username, password)
     )
