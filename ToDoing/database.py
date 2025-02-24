@@ -1,7 +1,5 @@
 import sqlite3 as sql
-from dataclasses import dataclass
 from flask import g
-
 
 db_file = "database.db"
 
@@ -11,12 +9,6 @@ def get_db() -> sql.Connection:
     if db is None:
         db = g._database = sql.connect(db_file)
     return db
-
-
-@dataclass
-class User:
-    username: str
-    password: str
 
 
 def check_username_available(username):
@@ -35,7 +27,6 @@ def check_username_available(username):
 def insertUser(username, password):
     con = get_db()
     cur = con.cursor()
-    # Hint. Use the above function
     cur.execute(
         "INSERT INTO users  \
         (username,password) VALUES (?,?)",
