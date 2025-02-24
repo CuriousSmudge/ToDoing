@@ -1,21 +1,14 @@
 from dataclasses import dataclass
-from flask import request, session
 import hashlib
 import secrets
-import functools
+from flask import request
+from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
 from main import app
-
 import database
 
 
-def require_api_token(func):
-    @functools.wraps(func)
-    def check_token(*args, **kwargs):
-        if "api_session_token" not in session:
-            return "Access denied"
-        return func(*args, **kwargs)
-
-    return check_token
+basic_auth = HTTPBasicAuth()
+token_auth = HTTPTokenAuth()
 
 
 @dataclass
@@ -34,12 +27,16 @@ class User:
     def token(self): ...
 
 
+@basic_auth.verify_password
+def verify_password(username, password) -> User: ...
+
+
 @app.route("/signup", methods=["POST"])
 def signup(username: str, password: str) -> str:
     username = request.form["username"]
     password = request.form["password"]
     if database.check_username_available(username):
-        database.insertUser(username, password)
+        database.insert_user(username, password)
         return "Account Created"
     else:
         return "Account Creation Failed"

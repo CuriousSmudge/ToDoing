@@ -11,20 +11,19 @@ def get_db() -> sql.Connection:
     return db
 
 
-def check_username_available(username):
-    # con = get_db()
-    # cur = con.cursor()
-    cur = get_db().cursor()
-    if username == cur.execute(
-        """SELECT username FROM users WHERE username=?""",
-        [username],
-    ):
-        return False
-    else:
-        return True
+def get_user(username):
+    con = get_db()
+    cur = con.cursor()
+    cur.execute(
+        """SELECT username, password FROM users \
+        WHERE (?) = username """,
+        (username),
+    )
+    user = cur.fetchall
+    return user
 
 
-def insertUser(username, password):
+def insert_user(username, password):
     con = get_db()
     cur = con.cursor()
     cur.execute(
@@ -32,14 +31,3 @@ def insertUser(username, password):
         (username,password) VALUES (?,?)",
         (username, password),
     )
-    con.commit()
-    con.close()
-
-
-def retrieveUsers():
-    con = sql.connect("database.db")
-    cur = con.cursor()
-    cur.execute("SELECT username, password FROM users")
-    users = cur.fetchall()
-    con.close()
-    return users
