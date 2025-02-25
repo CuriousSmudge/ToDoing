@@ -35,7 +35,7 @@ def verify_password(username, password) -> User: ...
 def signup(username: str, password: str) -> str:
     username = request.form["username"]
     password = request.form["password"]
-    if database.check_username_available(username):
+    if database.verify_username(username):
         database.insert_user(username, password)
         return "Account Created"
     else:

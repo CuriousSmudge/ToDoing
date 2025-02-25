@@ -11,7 +11,7 @@ def get_db() -> sql.Connection:
     return db
 
 
-def get_user(username):
+def get_user(username) -> list:
     con = get_db()
     cur = con.cursor()
     cur.execute(
@@ -19,8 +19,16 @@ def get_user(username):
         WHERE (?) = username """,
         (username),
     )
-    user = cur.fetchall
+    user = cur.fetchall()
     return user
+
+
+def verify_username(username):
+    user = get_user(username)
+    if user[0] == username:
+        return False
+    else:
+        return True
 
 
 def insert_user(username, password):
