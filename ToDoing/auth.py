@@ -1,8 +1,6 @@
 import hashlib
 import secrets
-from flask import request
 from flask_httpauth import HTTPBasicAuth
-from main import app
 import database
 
 
@@ -48,10 +46,3 @@ def verify_user(username, password) -> User | None:
 def basic_auth_error(error):
     # This says what you should send to the user after there is an error
     ...
-
-
-@app.route("/signup", methods=["POST"])
-def signup(username, password):
-    username = request.form["username"]
-    password = request.form["password"]
-    database.insert_user(username, password)
