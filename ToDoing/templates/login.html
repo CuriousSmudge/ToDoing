@@ -1,46 +1,53 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>ToDoing</title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='/login.css') }}">
-		<script src="{{ url_for('static', filename='login.js')}}"></script>
 
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
-	</head>
+<head>
+	<title>ToDoing</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='/login.css') }}">
+	<script src="{{ url_for('static', filename='login.js')}}"></script>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+		rel="stylesheet">
+</head>
 
 
-	<body>
-		<div id="background-image"> </div>
-		
-		<div class="poppup">
-			<h1>Welcome to ToDoing</h1>
-			
-			<div class"tab">
-				<button class="tablinks" onclick="switch_entry(event, 'Login')">Login</button>
-				<button class="tablinks" onclick="switch_entry(event, 'SignUp')">Sign Up</button>
-			</div>
+<body>
+	<div id="background-image"> </div>
 
-			<div id="Login" class="tabcontent" style="display: block;">
-				<h2>Login</h2>
-				<form action="/login" method="post">
-					<input type="text" placeholder="Username..." class="login-input" id="user" name="username" value=""><br>
-					<input type="password" placeholder="Password..." class="login-input" id="pass" name="password" value=""><br>
-					<input type="submit" value="Submit" class="login-input" id="submit">
-				</form>
+	<div class="poppup">
+		<h1>Welcome to ToDoing</h1>
 
-			</div>
-
-			<div id="SignUp" class="tabcontent">
-				<h2>Sign Up</h2>
-				<form action="/login" method="post">
-					<input type="text" placeholder="Username..." class="login-input" id="user" name="username" value=""><br>
-					<input type="password" placeholder="Password..." class="login-input" id="pass" name="password" value=""><br>
-					<input type="submit" value="Sign Up" class="login-input" id="submit">
-				</form>
-			</div>
+		<div class"tab">
+			<button class="tablinks" onclick="switch_entry(event, 'Login')">Login</button>
+			<button class="tablinks" onclick="switch_entry(event, 'SignUp')">Sign Up</button>
 		</div>
-	</body>
+
+		<div id="Login" class="tabcontent" style="display: block;">
+			<h2>Login</h2>
+			<form action="/login" method="post">
+				<input type="text" placeholder="Username..." class="login-input" id="user"
+					name="username" value=""><br>
+				<input type="password" placeholder="Password..." class="login-input" id="pass"
+					name="password" value=""><br>
+				<input type="submit" value="Submit" class="login-input" id="submit">
+			</form>
+
+		</div>
+
+		<div id="SignUp" class="tabcontent">
+			<h2>Sign Up</h2>
+			<form action="/signup" method="post">
+				<input type="text" placeholder="Username..." class="login-input" id="user"
+					name="username" value=""><br>
+				<input type="password" placeholder="Password..." class="login-input" id="pass"
+					name="password" value=""><br>
+				<input type="submit" value="Sign Up" class="login-input" id="submit">
+			</form>
+		</div>
+	</div>
+</body>
+
 </html>

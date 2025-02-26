@@ -1,8 +1,9 @@
-from flask import Flask, render_template, send_file, request
-import database
+from flask import Flask, render_template, send_file, request, jsonify
+
+import auth  # noqa
 
 app = Flask(__name__, template_folder="templates")
-import auth  # noqa:261
+import database  # noqa: E402
 
 # -------------------------------------------------------------------------- #
 
@@ -34,8 +35,9 @@ def serve_login_css():
     return data
 
 
-@app.route("/signup")
-def signup(username, password):
+@app.post("/signup")
+def signup():
     username = request.form["username"]
     password = request.form["password"]
     database.insert_user(username, password)
+    return jsonify(1), 200

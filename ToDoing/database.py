@@ -2,8 +2,32 @@ import sqlite3 as sql
 from flask import g
 import auth
 from auth import User
+import main
 
 db_file = "database.db"
+
+
+def init():
+    with main.app.app_context():
+        con = get_db()
+        cur = con.cursor()
+
+        tables = cur.execute(
+            """SELECT name FROM sqlite_master WHERE type='table""")
+        tables = [row[0] for row in cur.fetchall()]
+
+        if "users" not in tables:
+            cur.execute("""
+                        CREATE TABLE users (
+                        username NOT NULL,
+                        password NOT NULL,
+                        salt NOT NULL
+                        )
+                        """)
+            con.commit()
+
+
+init()
 
 
 def get_db() -> sql.Connection:
