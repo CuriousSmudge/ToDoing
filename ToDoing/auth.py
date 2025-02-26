@@ -1,6 +1,7 @@
 import hashlib
 import secrets
 from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import check_password_hash
 import database
 
 
@@ -38,11 +39,7 @@ def encrypt_password(password) -> tuple:
 
 
 @basic_auth.verify_password
-def verify_user(username, password) -> User | None:
+def verify_password(username, password) -> User | None:
     database.get_user(username)
-
-
-@basic_auth.error_handler
-def basic_auth_error(error):
-    # This says what you should send to the user after there is an error
-    ...
+    if username in check_password_hash(username, password):
+        return username
