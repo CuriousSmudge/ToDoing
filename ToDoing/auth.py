@@ -1,42 +1,57 @@
-from dataclasses import dataclass
 import hashlib
 import secrets
 from flask import request
-from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth
+from flask_httpauth import HTTPBasicAuth
 from main import app
 import database
 
 
 basic_auth = HTTPBasicAuth()
-token_auth = HTTPTokenAuth()
 
 
-@dataclass
 class User:
     username: str
-    password: str
     hashedPassword: bytes
+    salt: bytes
 
-    def hash_password(self, password) -> bytes:
-        salt = secrets.token_bytes(64)
-        t_sha = hashlib.sha256()
-        t_sha.update(password + salt)
-        hashedPassword = t_sha.digest()
-        return hashedPassword
+    def __init__(self, username, hashedPassword, salt):
+        self.username = username
+        self.hashedPassword = hashedPassword
+        self.salt = salt
 
-    def token(self): ...
+    def __call__(self):
+        return self.username, self.hashedPassword, self.salt
+
+
+def does_user_exist(username) -> bool:
+    user = database.get_user(username)
+    if user()[0] == username:
+        return True
+    else:
+        return False
+
+
+def encrypt_password(password) -> tuple:
+    salt = secrets.token_bytes(32)
+    t_sha = hashlib.sha256()
+    t_sha.update(password + salt)
+    hashedPassword = t_sha.digest()
+    return hashedPassword, salt
 
 
 @basic_auth.verify_password
-def verify_password(username, password) -> User: ...
+def verify_user(username, password) -> User | None:
+    database.get_user(username)
+
+
+@basic_auth.error_handler
+def basic_auth_error(error):
+    # This says what you should send to the user after there is an error
+    ...
 
 
 @app.route("/signup", methods=["POST"])
-def signup(username: str, password: str) -> str:
+def signup(username, password):
     username = request.form["username"]
     password = request.form["password"]
-    if database.verify_username(username):
-        database.insert_user(username, password)
-        return "Account Created"
-    else:
-        return "Account Creation Failed"
+    database.insert_user(username, password)

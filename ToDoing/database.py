@@ -1,5 +1,7 @@
 import sqlite3 as sql
 from flask import g
+import auth
+from auth import User
 
 db_file = "database.db"
 
@@ -11,31 +13,30 @@ def get_db() -> sql.Connection:
     return db
 
 
-def get_user(username) -> list:
+def get_user(username) -> User:
     con = get_db()
     cur = con.cursor()
     cur.execute(
-        """SELECT username, password FROM users \
+        """SELECT username, password, salt FROM users \
         WHERE (?) = username """,
         (username),
     )
-    user = cur.fetchall()
-    return user
-
-
-def verify_username(username):
-    user = get_user(username)
-    if user[0] == username:
-        return False
-    else:
-        return True
+    username, hashedPassword, salt = cur.fetchall()
+    return User(username, hashedPassword, salt)
 
 
 def insert_user(username, password):
+    if auth.does_user_exist(username):
+        raise Exception
+    encryption = auth.encrypt_password(password)
+    hashedPassword = encryption[0]
+    salt = encryption[1]
+
     con = get_db()
     cur = con.cursor()
     cur.execute(
         "INSERT INTO users  \
-        (username,password) VALUES (?,?)",
-        (username, password),
+        (username,password,salt) VALUES (?,?,?)",
+        (username, hashedPassword, salt),
     )
+    con.commit()

@@ -2,7 +2,6 @@ from flask import Flask, render_template, send_file
 
 app = Flask(__name__, template_folder="templates")
 
-import auth  # noqa:261
 
 # -------------------------------------------------------------------------- #
 
