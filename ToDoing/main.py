@@ -2,6 +2,7 @@ from flask import Flask, render_template, send_file, request, jsonify
 
 app = Flask(__name__, template_folder="templates")
 import database  # noqa: E402
+import auth  # noqa: E402
 
 # -------------------------------------------------------------------------- #
 
@@ -39,3 +40,17 @@ def signup():
     password = request.form["password"]
     database.insert_user(username, password)
     return jsonify(1), 200
+
+
+@app.get("/verify_user")
+@auth.basic_auth.login_required
+def verify_user():
+    return jsonify(1), 200
+
+
+# @app.post("/login_user")
+# def login_user():
+#     username = request.form["username"]
+#     password = request.form["password"]
+#     auth.verify_password(username, password)
+#     return jsonify(1), 200

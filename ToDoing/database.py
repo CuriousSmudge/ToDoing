@@ -17,11 +17,11 @@ def get_user(username) -> User:
     con = get_db()
     cur = con.cursor()
     cur.execute(
-        """SELECT username, password, salt FROM users WHERE (?) = username """,
+        """SELECT username, password FROM users WHERE username = (?) """,
         (username,),
     )
-    username, hashedPassword, salt = cur.fetchall()
-    return User(username, hashedPassword, salt)
+    username, hashedPassword = cur.fetchone()
+    return User(username, hashedPassword)
 
 
 def does_user_exist(username) -> bool:
@@ -31,24 +31,25 @@ def does_user_exist(username) -> bool:
         """SELECT username FROM users WHERE (?) = username""",
         (username,),
     )
-    if cur.fetchall() is None:
+    result = cur.fetchone()
+    if result is None:
         return False
-    elif username == cur.fetchall():
+    elif username == result:
         return True
+    else:
+        return False
 
 
 def insert_user(username, password):
     if does_user_exist(username):
         raise Exception
-    encryption = auth.encrypt_password(password)
-    hashedPassword = encryption[0]
-    salt = encryption[1]
+    hashedPassword = auth.encrypt_password(password)
 
     con = get_db()
     cur = con.cursor()
     cur.execute(
         "INSERT INTO users  \
-        (username,password,salt) VALUES (?,?,?)",
-        (username, hashedPassword, salt),
+        (username,password) VALUES (?,?)",
+        (username, hashedPassword),
     )
     con.commit()

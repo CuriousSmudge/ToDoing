@@ -1,7 +1,5 @@
-import hashlib
-import secrets
 from flask_httpauth import HTTPBasicAuth
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 import database
 
 
@@ -10,29 +8,23 @@ basic_auth = HTTPBasicAuth()
 
 class User:
     username: str
-    hashedPassword: bytes
-    salt: bytes
+    hashedPassword: str
 
-    def __init__(self, username, hashedPassword, salt):
+    def __init__(self, username, hashedPassword):
         self.username = username
         self.hashedPassword = hashedPassword
-        self.salt = salt
 
     def __call__(self):
-        return self.username, self.hashedPassword, self.salt
+        return self.username, self.hashedPassword
 
 
-def encrypt_password(password) -> tuple:
-    salt = secrets.token_bytes(32)
-    password = bytes(password, "utf-8")
-    t_sha = hashlib.sha256()
-    t_sha.update(password + salt)
-    hashedPassword = t_sha.digest()
-    return hashedPassword, salt
+def encrypt_password(password) -> str:
+    hashedPassword = generate_password_hash(password)
+    return hashedPassword
 
 
 @basic_auth.verify_password
 def verify_password(username, password) -> User | None:
-    database.get_user(username)
-    if username in check_password_hash(username, password):
+    user = database.get_user(username)
+    if check_password_hash(user.hashedPassword, password):
         return username
