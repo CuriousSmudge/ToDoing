@@ -1,7 +1,5 @@
 from flask import Flask, render_template, send_file, request, jsonify
 
-import auth  # noqa
-
 app = Flask(__name__, template_folder="templates")
 import database  # noqa: E402
 

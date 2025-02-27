@@ -2,32 +2,8 @@ import sqlite3 as sql
 from flask import g
 import auth
 from auth import User
-import main
 
 db_file = "database.db"
-
-
-def init():
-    with main.app.app_context():
-        con = get_db()
-        cur = con.cursor()
-
-        tables = cur.execute(
-            """SELECT name FROM sqlite_master WHERE type='table""")
-        tables = [row[0] for row in cur.fetchall()]
-
-        if "users" not in tables:
-            cur.execute("""
-                        CREATE TABLE users (
-                        username NOT NULL,
-                        password NOT NULL,
-                        salt NOT NULL
-                        )
-                        """)
-            con.commit()
-
-
-init()
 
 
 def get_db() -> sql.Connection:
@@ -41,16 +17,28 @@ def get_user(username) -> User:
     con = get_db()
     cur = con.cursor()
     cur.execute(
-        """SELECT username, password, salt FROM users \
-        WHERE (?) = username """,
-        (username),
+        """SELECT username, password, salt FROM users WHERE (?) = username """,
+        (username,),
     )
     username, hashedPassword, salt = cur.fetchall()
     return User(username, hashedPassword, salt)
 
 
+def does_user_exist(username) -> bool:
+    con = get_db()
+    cur = con.cursor()
+    cur.execute(
+        """SELECT username FROM users WHERE (?) = username""",
+        (username,),
+    )
+    if cur.fetchall() is None:
+        return False
+    elif username == cur.fetchall():
+        return True
+
+
 def insert_user(username, password):
-    if auth.does_user_exist(username):
+    if does_user_exist(username):
         raise Exception
     encryption = auth.encrypt_password(password)
     hashedPassword = encryption[0]

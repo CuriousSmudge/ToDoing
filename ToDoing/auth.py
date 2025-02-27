@@ -22,16 +22,9 @@ class User:
         return self.username, self.hashedPassword, self.salt
 
 
-def does_user_exist(username) -> bool:
-    user = database.get_user(username)
-    if user()[0] == username:
-        return True
-    else:
-        return False
-
-
 def encrypt_password(password) -> tuple:
     salt = secrets.token_bytes(32)
+    password = bytes(password, "utf-8")
     t_sha = hashlib.sha256()
     t_sha.update(password + salt)
     hashedPassword = t_sha.digest()
