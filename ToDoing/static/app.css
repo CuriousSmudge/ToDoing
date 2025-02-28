@@ -1,0 +1,16 @@
+
+html, body {
+	margin: 0;
+	height: 100%;
+	overflow: hidden
+}
+
+#background-image {
+	background-image: url("/static/images/login-background.jpg");
+	background-repeat: no-repeat;
+	filter: blur(8px) brightness(60%);
+	width: 100vw;
+	height: 100vh;
+	background-position: center;
+	background-size: cover;
+}

@@ -34,6 +34,18 @@ def serve_login_css():
     return data
 
 
+@app.route("/app")
+def app_html():
+    return render_template("app.html")
+
+
+@app.route("/app.css")
+def serve_app_css():
+    with open("static/login.css") as file:
+        data = file.read()
+    return data
+
+
 @app.post("/signup")
 def signup():
     username = request.form["username"]
@@ -46,11 +58,3 @@ def signup():
 @auth.basic_auth.login_required
 def verify_user():
     return jsonify(1), 200
-
-
-# @app.post("/login_user")
-# def login_user():
-#     username = request.form["username"]
-#     password = request.form["password"]
-#     auth.verify_password(username, password)
-#     return jsonify(1), 200
