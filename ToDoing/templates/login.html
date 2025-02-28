@@ -4,6 +4,7 @@
 <head>
 	<title>ToDoing</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='/login.css') }}">
+	<script src="/static/jq.js"></script>
 	<script src="{{ url_for('static', filename='login.js')}}"></script>
 
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,10 +28,10 @@
 
 		<div id="Login" class="tabcontent" style="display: block;">
 			<h2>Login</h2>
-			<form action="/login_user" method="post">
-				<input type="text" placeholder="Username..." class="login-input" id="user"
+			<form action="/login_user" method="post" id="login_form">
+				<input type="text" placeholder="Username..." class="login-input" id="login_username"
 					name="username" value=""><br>
-				<input type="password" placeholder="Password..." class="login-input" id="pass"
+				<input type="password" placeholder="Password..." class="login-input" id="login_password"
 					name="password" value=""><br>
 				<input type="submit" value="Submit" class="login-input" id="submit">
 			</form>
@@ -48,6 +49,34 @@
 			</form>
 		</div>
 	</div>
+	<script>
+		$('#login_form').on('submit', function (event) {
+			event.preventDefault();
+			const username = $('#login_username').val()
+			const password = $('#login_password').val()
+			console.log(username, password)
+
+			const authHeader = "Basic " + btoa(username + ":" + password);
+			$.ajax({
+				type: "GET",
+				url: "/verify_user",
+				headers: {
+					Authorization: authHeader
+				},
+				success: function (response) {
+					console.log("Login Success")
+					localStorage.setItem("username", username);
+					localStorage.setItem("password", password);
+					window.location.replace("/app")
+				},
+				error: function (response) {
+					console.log("Login Failed")
+					alert("Incorrect Username or Password")
+				}
+			})
+
+		})
+	</script>
 </body>
 
 </html>
