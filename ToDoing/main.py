@@ -1,4 +1,5 @@
 from flask import Flask, render_template, send_file, request, jsonify
+from werkzeug.datastructures import file_storage
 
 app = Flask(__name__, template_folder="templates")
 import database  # noqa: E402
@@ -44,6 +45,22 @@ def serve_app_css():
     with open("static/login.css") as file:
         data = file.read()
     return data
+
+
+@app.get("/tasks")
+@auth.basic_auth.login_required
+def get_tasks():
+    username = auth.basic_auth.current_user()
+    return database.get_tasks_for_user(username), 200
+
+
+@app.post("/tasks")
+@auth.basic_auth.login_required
+def add_tasks():
+    username = auth.basic_auth.current_user()
+    task = request.form["task"]
+    database.add_task(username, task)
+    return jsonify(1), 200
 
 
 @app.post("/signup")

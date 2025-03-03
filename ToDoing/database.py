@@ -53,3 +53,35 @@ def insert_user(username, password):
         (username, hashedPassword),
     )
     con.commit()
+
+
+def get_tasks_for_user(username):
+    con = get_db()
+    cur = con.cursor()
+    cur.execute(
+        """SELECT * FROM tasks WHERE (?) = username""",
+        (username,),
+    )
+    data = cur.fetchall()
+
+    result = []
+    for task in data:
+        dictionary = {}
+        dictionary["id"] = task[0]
+        dictionary["task"] = task[2]
+        dictionary["completed"] = task[3]
+
+        result.append(dictionary)
+
+    return result
+
+
+def add_task(username, task):
+    con = get_db()
+    cur = con.cursor()
+    cur.execute(
+        """INSERT INTO tasks \
+            (username, task, completed) VALUES (?,?,0)""",
+        (username, task),
+    )
+    con.commit()
