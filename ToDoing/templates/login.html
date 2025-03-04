@@ -2,81 +2,80 @@
 <html>
 
 <head>
-	<title>ToDoing Login</title>
-	<link rel="stylesheet" href="{{ url_for('static', filename='/login.css') }}">
-	<script src="/static/jq.js"></script>
-	<script src="{{ url_for('static', filename='login.js')}}"></script>
+    <title>ToDoing Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='/style.css') }}">
+    <script src="/static/jq.js"></script>
+    <script src="{{ url_for('static', filename='login.js')}}"></script>
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
-		rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+        rel="stylesheet">
 </head>
 
 
 <body>
-	<div id="background-image"> </div>
+    <div id="background-image"> </div>
 
-	<div class="poppup">
-		<h1>Welcome to ToDoing</h1>
+    <div class="poppup">
+        <h1>Welcome to ToDoing</h1>
 
-		<div class"tab">
-			<button class="tablinks" onclick="switch_entry(event, 'Login')">Login</button>
-			<button class="tablinks" onclick="switch_entry(event, 'SignUp')">Sign Up</button>
-		</div>
+        <div class"tab">
+            <button class="tablinks" onclick="switch_entry(event, 'Login')">Login</button>
+            <button class="tablinks" onclick="switch_entry(event, 'SignUp')">Sign Up</button>
+        </div>
 
-		<div id="Login" class="tabcontent" style="display: block;">
-			<h2>Login</h2>
-			<form action="/login_user" method="post" id="login_form">
-				<input type="text" placeholder="Username..." class="login-input" id="login_username"
-					name="username" value=""><br>
-				<input type="password" placeholder="Password..." class="login-input" id="login_password"
-					name="password" value=""><br>
-				<input type="submit" value="Submit" class="login-input" id="submit">
-			</form>
+        <div id="Login" class="tabcontent" style="display: block;">
+            <h2>Login</h2>
+            <form action="/login_user" method="post" id="login_form">
+                <input type="text" placeholder="Username..." class="login-input" id="login_username" name="username"
+                    value=""><br>
+                <input type="password" placeholder="Password..." class="login-input" id="login_password" name="password"
+                    value=""><br>
+                <input type="submit" value="Submit" class="login-input" id="submit">
+            </form>
 
-		</div>
+        </div>
 
-		<div id="SignUp" class="tabcontent">
-			<h2>Sign Up</h2>
-			<form action="/signup" method="post">
-				<input type="text" placeholder="Username..." class="login-input" id="user"
-					name="username" value=""><br>
-				<input type="password" placeholder="Password..." class="login-input" id="pass"
-					name="password" value=""><br>
-				<input type="submit" value="Sign Up" class="login-input" id="submit">
-			</form>
-		</div>
-	</div>
-	<script>
-		$('#login_form').on('submit', function (event) {
-			event.preventDefault();
-			const username = $('#login_username').val()
-			const password = $('#login_password').val()
-			console.log(username, password)
+        <div id="SignUp" class="tabcontent">
+            <h2>Sign Up</h2>
+            <form action="/signup" method="post">
+                <input type="text" placeholder="Username..." class="login-input" id="user" name="username" value=""><br>
+                <input type="password" placeholder="Password..." class="login-input" id="pass" name="password"
+                    value=""><br>
+                <input type="submit" value="Sign Up" class="login-input" id="submit">
+            </form>
+        </div>
+    </div>
+    <script>
+        $('#login_form').on('submit', function (event) {
+            event.preventDefault();
+            const username = $('#login_username').val()
+            const password = $('#login_password').val()
+            console.log(username, password)
 
-			const authHeader = "Basic " + btoa(username + ":" + password);
-			$.ajax({
-				type: "GET",
-				url: "/verify_user",
-				headers: {
-					Authorization: authHeader
-				},
-				success: function (response) {
-					console.log("Login Success")
-					localStorage.setItem("username", username);
-					localStorage.setItem("password", password);
-					window.location.replace("/app")
-				},
-				error: function (response) {
-					console.log("Login Failed")
-					alert("Incorrect Username or Password")
-				}
-			})
+            const authHeader = "Basic " + btoa(username + ":" + password);
+            $.ajax({
+                type: "GET",
+                url: "/verify_user",
+                headers: {
+                    Authorization: authHeader
+                },
+                success: function (response) {
+                    console.log("Login Success")
+                    localStorage.setItem("username", username);
+                    localStorage.setItem("password", password);
+                    window.location.replace("/app")
+                },
+                error: function (response) {
+                    console.log("Login Failed")
+                    alert("Incorrect Username or Password")
+                }
+            })
 
-		})
-	</script>
+        })
+    </script>
 </body>
 
 </html>

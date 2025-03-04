@@ -1,0 +1,129 @@
+:root {
+    --crust: #dce0e8;
+    --mantle: #e6e9ef;
+    --base: #eff1f5; 
+    --surface0: #ccd0da;
+    --surface1: #bcc0cc;
+    --surface2: #acb0be;
+    --overlay0: #9ca0b0;
+    --overlay2: #7c7f93;
+    --text: #4c4f69;
+    --subtext0: #6c6f85;
+    --subtext1: #5c5f77;
+    --flamingo: #dd7878;
+    --mauve: #8839ef;
+    --red: #d20f39;
+    --peach: #fe640b;
+    --yellow: #df8e1d;
+    --green: #40a02b;
+    --teal: #179299;
+    --blue: #1e66f5;
+}
+
+html, body {
+	margin: 0;
+	height: 100%;
+	overflow: hidden
+}
+
+h1, h2 {
+	font-family: "Gloock";
+	color: var(--text);
+	font-size: 46px;
+	margin: 10px;
+}
+
+h2 {
+	font-size: 32px;	
+}
+
+.tab {
+	overflow: hidden;
+}
+
+.tab button.active {
+	background-color: var(--surface0);
+}
+
+.tabcontent {
+	display: none;
+}
+
+::placeholder {
+	font-family: "JetBrains Mono";
+	font-style: italic;
+	color: var(--subtext1); 
+	opacity: 1;
+}
+
+.login-input {
+	padding: 4%;
+	border-radius: 28px;
+	background-color: var(--overlay0);
+	border: none;
+	margin: 3%;
+	width: 70%;
+	font-family: "JetBrains Mono";
+	color: var(--text); 
+}
+
+.add_task {
+    width: 80%;
+    padding: 1%;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--overlay2);
+    font-family: "JetBrains Mono";
+    color: var(--text);
+}
+
+#background-image {
+	background-image: url("/static/images/login-background.jpg");
+	background-repeat: no-repeat;
+	filter: blur(8px) brightness(60%);
+	width: 100vw;
+	height: 100vh;
+	background-position: center;
+	background-size: cover;
+}
+
+.poppup {
+	filter: blur(0px);
+	width: 340px;
+	height: 420px;
+	background-color: var(--crust);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	text-align: center;
+	padding: 1vh;
+	border-radius: 28px;
+}
+
+#workspace {
+	padding: 1vh;
+    width: 560px;
+    height: 90%;
+	border: var(--overlay2);
+	border-radius: 12px;
+	border-width: 12px;
+}
+
+.completed {
+    list-style-image: url(/images/check-circle-fill.svg);
+    text-decoration: line-through;
+    color: var(--subtext0);
+    background-color: var(--overlay2);
+}
+
+li {
+    cursor: pointer;
+    color: var(--text);
+    font-family: "JetBrains Mono";
+    background-color: var(--overlay0);
+    border-radius: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    list-style-image: url(/images/check-circle.svg)
+}
