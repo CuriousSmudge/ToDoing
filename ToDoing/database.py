@@ -20,7 +20,11 @@ def get_user(username) -> User:
         """SELECT username, password FROM users WHERE username = (?) """,
         (username,),
     )
-    username, hashedPassword = cur.fetchone()
+
+    d = cur.fetchone()
+    print("!" * 100 + f"\n{d}")
+
+    username, hashedPassword = d
     return User(username, hashedPassword)
 
 
@@ -32,12 +36,7 @@ def does_user_exist(username) -> bool:
         (username,),
     )
     result = cur.fetchone()
-    if result is None:
-        return False
-    elif username == result:
-        return True
-    else:
-        return False
+    return username == result
 
 
 def insert_user(username, password):
@@ -67,9 +66,9 @@ def get_tasks_for_user(username):
     result = []
     for task in data:
         dictionary = {}
-        dictionary["id"] = task[0]
-        dictionary["task"] = task[2]
-        dictionary["completed"] = task[3]
+        dictionary["id"] = task[3]
+        dictionary["task"] = task[1]
+        dictionary["completed"] = task[2]
 
         result.append(dictionary)
 

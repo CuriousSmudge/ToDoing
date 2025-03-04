@@ -59,6 +59,7 @@ def get_tasks():
 def add_tasks():
     username = auth.basic_auth.current_user()
     task = request.form["task"]
+    print(f"Task recived {task}")
     database.add_task(username, task)
     return jsonify(1), 200
 
