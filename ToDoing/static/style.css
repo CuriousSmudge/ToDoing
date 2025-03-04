@@ -108,16 +108,23 @@ h2 {
 	border: var(--overlay2);
 	border-radius: 12px;
 	border-width: 12px;
+    text-align: center;
 }
 
 .completed {
-    list-style-image: url(/images/check-circle-fill.svg);
     text-decoration: line-through;
     color: var(--subtext0);
     background-color: var(--overlay2);
 }
 
+ul {
+    text-align: center;
+    padding-left: 0px;
+}
+
 li {
+    display: inline-block;
+    text-align: left;
     cursor: pointer;
     color: var(--text);
     font-family: "JetBrains Mono";
@@ -125,5 +132,7 @@ li {
     border-radius: 8px;
     margin-top: 4px;
     margin-bottom: 4px;
-    list-style-image: url(/images/check-circle.svg)
+    list-style: none;
+    width: 85%;
+    padding: 4px;
 }
