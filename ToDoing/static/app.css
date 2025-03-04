@@ -43,3 +43,7 @@ html, body {
 	border-radius: 12px;
 	border-width: 12px;
 }
+
+li {
+    cursor: pointer;
+}

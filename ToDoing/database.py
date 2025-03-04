@@ -22,8 +22,6 @@ def get_user(username) -> User:
     )
 
     d = cur.fetchone()
-    print("!" * 100 + f"\n{d}")
-
     username, hashedPassword = d
     return User(username, hashedPassword)
 
@@ -84,3 +82,30 @@ def add_task(username, task):
         (username, task),
     )
     con.commit()
+
+
+def toggle_completion():
+    con = get_db()
+    cur = con.cursor()
+    cur.execute(
+        """SELECT completed FROM tasks WHERE (?) = id"""(
+            id,
+        ),
+    )
+    completed = cur.fetchone()
+    if completed == 1:
+        (
+            cur.execute(
+                """INSERT INTO tasks \
+                (completed) VALUES (0)""",
+            ),
+        )
+        con.commit()
+    else:
+        (
+            cur.execute(
+                """INSERT INTO tasks \
+                (completed) VALUES (1)""",
+            ),
+        )
+        con.commit()

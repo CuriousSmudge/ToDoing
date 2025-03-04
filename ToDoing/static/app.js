@@ -52,13 +52,45 @@ function add_tasks_to_dom(response) {
 	for (i=0; i < response.length; i++) {
 		let task = response[i]
 		let text = task["task"]
-		console.log(text)
+        let id = task["id"]
+		console.log(text, id)
 		let completion = task["completed"]
 		if (completion === 0) {
-			$("#list").append("<li>" + text + "</li>")
+			$("#list").append("<li id='" + id + "' onclick='update_task_status(this)'>" + text + "</li>")
 		}
 		else {
-			$("#list").append("<li class=completed>" + text + "</li>")
+			$("#list").append("<li id='" + id + "' onclick='update_task_status(this)' class=completed>" + text + "</li>")
 		}
 	}
+}
+
+
+function update_task_status(t) {
+    $(t).click(function() {
+        $(t).toggleClass("completed");
+    });
+    
+    let completion = 0
+
+    if (t.classList.contains("completed")) {
+        let completion = 1
+    }
+    $.ajax({
+        type: "POST",
+        url: "/task_status",
+        headers: {
+            Authorization: authHeader
+        },
+        data: {
+            "completion": completion
+        },
+        success: function(response) {
+            console.log("Completion Processed!")
+            console.log(response)
+        },
+        error: function (response) {
+            console.log("Completion Error: Not Processed")
+            console.log(response)
+        }
+    });
 }

@@ -1,5 +1,4 @@
 from flask import Flask, render_template, send_file, request, jsonify
-from werkzeug.datastructures import file_storage
 
 app = Flask(__name__, template_folder="templates")
 import database  # noqa: E402
@@ -61,6 +60,13 @@ def add_tasks():
     task = request.form["task"]
     print(f"Task recived {task}")
     database.add_task(username, task)
+    return jsonify(1), 200
+
+
+@app.get("task_status")
+@auth.basic_auth.login_required
+def change_task_status():
+    database.toggle_completion()
     return jsonify(1), 200
 
 
