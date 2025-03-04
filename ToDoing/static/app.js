@@ -76,13 +76,14 @@ function update_task_status(t) {
         let completion = 1
     }
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/task_status",
         headers: {
             Authorization: authHeader
         },
         data: {
-            "completion": completion
+            "completion": completion,
+            "id": t.id
         },
         success: function(response) {
             console.log("Completion Processed!")

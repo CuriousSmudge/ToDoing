@@ -66,7 +66,9 @@ def add_tasks():
 @app.get("/task_status")
 @auth.basic_auth.login_required
 def change_task_status():
-    database.toggle_completion()
+    identification = request.form["id"]
+    completion = request.form["completion"]
+    database.toggle_completion(completion, identification)
     return jsonify(1), 200
 
 

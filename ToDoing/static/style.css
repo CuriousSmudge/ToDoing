@@ -135,4 +135,5 @@ li {
     list-style: none;
     width: 85%;
     padding: 4px;
+    user-select: none;
 }
