@@ -59,7 +59,7 @@ h2 {
 .login-input {
 	padding: 4%;
 	border-radius: 28px;
-	background-color: var(--overlay0);
+	background-color: var(--surface0);
 	border: none;
 	margin: 3%;
 	width: 70%;
@@ -72,7 +72,7 @@ h2 {
     padding: 1%;
     border-radius: 8px;
     border: none;
-    background-color: var(--overlay2);
+    background-color: var(--mantle);
     font-family: "JetBrains Mono";
     color: var(--text);
 }
@@ -102,7 +102,7 @@ h2 {
 }
 
 .tablinks {
-    background-color: var(--overlay0);
+    background-color: var(--surface0);
     color: var(--text);
     border-radius: 12px;
     border: none;
@@ -128,7 +128,7 @@ h2 {
 .completed {
     text-decoration: line-through;
     color: var(--subtext0);
-    background-color: var(--overlay2);
+    background-color: var(--overlay0);
 }
 
 ul {
@@ -142,7 +142,7 @@ li {
     cursor: pointer;
     color: var(--text);
     font-family: "JetBrains Mono";
-    background-color: var(--overlay0);
+    background-color: var(--surface0);
     border-radius: 8px;
     margin-top: 4px;
     margin-bottom: 4px;
