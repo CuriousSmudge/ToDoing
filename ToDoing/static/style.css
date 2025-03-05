@@ -156,11 +156,17 @@ button {
     border: none;
     background-color: var(--surface0);
     border-radius: 8px;
-    margin-top: 4px;
-    margin-bottom: 4px;
+    margin: 4px;
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 button:hover {
     background-color: var(--overlay0);
     cursor: pointer;
+}
+
+embed {
+    pointer-events: none;
 }

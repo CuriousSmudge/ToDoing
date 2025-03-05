@@ -56,10 +56,10 @@ function add_tasks_to_dom(response) {
 		console.log(text, id)
 		let completion = task["completed"]
 		if (completion === 0) {
-            $("#list").append("<li id='" + id + "' onclick='update_task_status(this)'>" + text + "</li><button class=delete_button id='" + id + "' onclick='delete_task(this)'><embed src='static/images/trash-fill.svg'></button>")
+            $("#list").append("<li id='" + id + "' onclick='update_task_status(this)'>" + text + "</li><button aria-label='delete button'class=delete_button id='" + id + "' onclick='delete_task(this)'><embed src='static/images/trash-fill.svg' onclick='console.log(1)'></button>")
 		}
 		else {
-			$("#list").append("<li id='" + id + "' onclick='update_task_status(this)' class=completed>" + text + "</li><button class=delete_button id='" + id + "'><embed src='static/images/trash-fill.svg'></button>")
+			$("#list").append("<li id='" + id + "' onclick='update_task_status(this)' class=completed>" + text + "</li><button aria-label='delete button' class=delete_button id='" + id + "'><embed src='static/images/trash-fill.svg'></button>")
 		}
 	}
 }
