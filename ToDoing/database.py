@@ -87,17 +87,9 @@ def add_task(username, task):
 def toggle_completion(completion, identification):
     con = get_db()
     cur = con.cursor()
-    if completion == 1:
-        cur.execute(
-            """UPDATE tasks SET completed = 0 \
-            WHERE (?) = id""",
-            (identification),
-        )
-        con.commit()
-    else:
-        cur.execute(
-            """UPDATE tasks SET completed = 1 \
-            WHERE (?) = id""",
-            (identification),
-        )
-        con.commit()
+    cur.execute(
+        """UPDATE tasks SET completed = (?) \
+        WHERE id = (?)""",
+        (completion, identification),
+    )
+    con.commit()

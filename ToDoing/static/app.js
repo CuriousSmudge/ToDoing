@@ -66,24 +66,23 @@ function add_tasks_to_dom(response) {
 
 
 function update_task_status(t) {
-    $(t).click(function() {
-        $(t).toggleClass("completed");
-    });
+    $(t).toggleClass("completed");
     
     let completion = 0
 
     if (t.classList.contains("completed")) {
-        let completion = 1
+        completion = 1
     }
+    console.log(t.id)
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "/task_status",
         headers: {
             Authorization: authHeader
         },
         data: {
             "completion": completion,
-            "id": t.id
+            "id": String(t.id)
         },
         success: function(response) {
             console.log("Completion Processed!")
