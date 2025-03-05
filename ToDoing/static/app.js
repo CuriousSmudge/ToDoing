@@ -65,6 +65,11 @@ function add_tasks_to_dom(response) {
 }
 
 
+function delete_task(t) {
+    
+}
+
+
 function update_task_status(t) {
     $(t).toggleClass("completed");
     
