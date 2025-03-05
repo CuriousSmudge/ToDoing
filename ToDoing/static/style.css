@@ -101,6 +101,20 @@ h2 {
 	border-radius: 28px;
 }
 
+.tablinks {
+    background-color: var(--overlay0);
+    color: var(--text);
+    border-radius: 12px;
+    border: none;
+    width: 20%;
+    height: 4%:
+}
+
+.tablinks:hover {
+    background-color: var(--overlay2);
+    cursor: pointer;
+}
+
 #workspace {
 	padding: 1vh;
     width: 560px;
