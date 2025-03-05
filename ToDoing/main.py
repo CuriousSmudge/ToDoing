@@ -73,6 +73,15 @@ def change_task_status():
     return jsonify(1), 200
 
 
+@app.post("/task_delete")
+@auth.basic_auth.login_required
+def delete_task():
+    print(request)
+    identification = request.form["id"]
+    database.remove_task_from_db(identification)
+    return jsonify(1), 200
+
+
 @app.post("/signup")
 def signup():
     username = request.form["username"]

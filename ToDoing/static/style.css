@@ -151,3 +151,16 @@ li {
     padding: 4px;
     user-select: none;
 }
+
+button {
+    border: none;
+    background-color: var(--surface0);
+    border-radius: 8px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+button:hover {
+    background-color: var(--overlay0);
+    cursor: pointer;
+}

@@ -56,19 +56,37 @@ function add_tasks_to_dom(response) {
 		console.log(text, id)
 		let completion = task["completed"]
 		if (completion === 0) {
-			$("#list").append("<li id='" + id + "' onclick='update_task_status(this)'>" + text + "</li>")
+            $("#list").append("<li id='" + id + "' onclick='update_task_status(this)'>" + text + "</li><button class=delete_button id='" + id + "' onclick='delete_task(this)'><embed src='static/images/trash-fill.svg'></button>")
 		}
 		else {
-			$("#list").append("<li id='" + id + "' onclick='update_task_status(this)' class=completed>" + text + "</li>")
+			$("#list").append("<li id='" + id + "' onclick='update_task_status(this)' class=completed>" + text + "</li><button class=delete_button id='" + id + "'><embed src='static/images/trash-fill.svg'></button>")
 		}
 	}
 }
 
 
 function delete_task(t) {
-    
+    console.log(t.id)
+    $.ajax({
+        type: "POST",
+        url: "/task_delete",
+        headers: {
+            Authorization: authHeader
+        },
+        data: {
+            "id": String(t.id)
+        },
+        success: function(response) {
+            console.log("Task Deleted")
+            console.log(response)
+            location.reload()
+        },
+        error: function(response) {
+            console.log("Task Deletion Error")
+            console.log(response)
+        }
+    });
 }
-
 
 function update_task_status(t) {
     $(t).toggleClass("completed");
@@ -96,6 +114,6 @@ function update_task_status(t) {
         error: function (response) {
             console.log("Completion Error: Not Processed")
             console.log(response)
-        }
+        },
     });
 }

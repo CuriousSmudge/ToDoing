@@ -93,3 +93,13 @@ def toggle_completion(completion, identification):
         (completion, identification),
     )
     con.commit()
+
+
+def remove_task_from_db(identification):
+    con = get_db()
+    cur = con.cursor()
+    cur.execute(
+        """DELETE FROM tasks WHERE id = (?)""",
+        (identification,),
+    )
+    con.commit()
