@@ -8,11 +8,29 @@
  "background_color": "#317EFB",
  "icons":[
 	 {
-		 "src": "/static/icons/disney.png",
+		 "src": "static/icons/disney.png",
 		 "sizes": "512x512",
 		 "type": "image/png",
 		 "purpose": "any maskable"
-	 }
+    },
+    {
+        "src": "static/icons/disney-256.png",
+        "sizes": "256x256",
+        "type": "image/png",
+        "purpose": "any maskable"
+    },
+    {
+        "src": "static/icons/disney-196.png",
+        "sizes": "196x196",
+        "type": "image/png",
+        "purpose": "any maskable"
+    },
+    {
+        "src": "static/icons/disney-128.png",
+        "sizes": "128x128",
+        "type": "image/png",
+        "purpose": "any maskable"
+    }
  ]
 }
 

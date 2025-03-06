@@ -49,6 +49,7 @@ def serve_app_css():
 @app.get("/tasks")
 @auth.basic_auth.login_required
 def get_tasks():
+    # Gets the user's tasks from the database and return a list of them.
     username = auth.basic_auth.current_user()
     return database.get_tasks_for_user(username), 200
 
@@ -56,6 +57,7 @@ def get_tasks():
 @app.post("/tasks")
 @auth.basic_auth.login_required
 def add_tasks():
+    # Takes the username and task text and sends them to the database
     username = auth.basic_auth.current_user()
     task = request.form["task"]
     print(f"Task recived {task}")
@@ -66,6 +68,7 @@ def add_tasks():
 @app.post("/task_status")
 @auth.basic_auth.login_required
 def change_task_status():
+    # Sends the order to toggle the completion of the task based on what it is.
     print(request)
     identification = request.form["id"]
     completion = request.form["completion"]
@@ -76,6 +79,7 @@ def change_task_status():
 @app.post("/task_delete")
 @auth.basic_auth.login_required
 def delete_task():
+    # Sends a request to the database to remove a task
     print(request)
     identification = request.form["id"]
     database.remove_task_from_db(identification)
@@ -84,6 +88,7 @@ def delete_task():
 
 @app.post("/signup")
 def signup():
+    # Assigns the username and password to the database
     username = request.form["username"]
     password = request.form["password"]
     database.insert_user(username, password)
@@ -93,4 +98,5 @@ def signup():
 @app.get("/verify_user")
 @auth.basic_auth.login_required
 def verify_user():
+    # Uses basic auth and verify_password() function to check local credentials
     return jsonify(1), 200

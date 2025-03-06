@@ -14,6 +14,7 @@ def get_db() -> sql.Connection:
 
 
 def get_user(username) -> User:
+    # Gets the user from the database based on username and returns User object
     con = get_db()
     cur = con.cursor()
     cur.execute(
@@ -27,6 +28,7 @@ def get_user(username) -> User:
 
 
 def does_user_exist(username) -> bool:
+    # Checks the database for an existing user before insertion
     con = get_db()
     cur = con.cursor()
     cur.execute(
@@ -38,6 +40,7 @@ def does_user_exist(username) -> bool:
 
 
 def insert_user(username, password):
+    # Inserts the user into the database while doing validation
     if does_user_exist(username):
         raise Exception
     hashedPassword = auth.encrypt_password(password)
@@ -53,6 +56,7 @@ def insert_user(username, password):
 
 
 def get_tasks_for_user(username):
+    # Takes all of the users tasks from the database and sends them back
     con = get_db()
     cur = con.cursor()
     cur.execute(
@@ -74,6 +78,7 @@ def get_tasks_for_user(username):
 
 
 def add_task(username, task):
+    # Adds a new task entry for the user into the database
     con = get_db()
     cur = con.cursor()
     cur.execute(
@@ -85,6 +90,7 @@ def add_task(username, task):
 
 
 def toggle_completion(completion, identification):
+    # Changes the completion level of the task
     con = get_db()
     cur = con.cursor()
     cur.execute(
@@ -96,6 +102,7 @@ def toggle_completion(completion, identification):
 
 
 def remove_task_from_db(identification):
+    # Removed task from database based on id of the task
     con = get_db()
     cur = con.cursor()
     cur.execute(

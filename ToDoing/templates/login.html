@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
         rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
 </head>
 
 
@@ -40,7 +41,7 @@
 
         <div id="SignUp" class="tabcontent">
             <h2>Sign Up</h2>
-            <form action="/signup" method="post">
+            <form id="signup_form">
                 <input type="text" placeholder="Username..." class="login-input" id="user" name="username" value=""><br>
                 <input type="password" placeholder="Password..." class="login-input" id="pass" name="password"
                     value=""><br>
@@ -74,6 +75,33 @@
                 }
             })
 
+        })
+
+        $('#signup_form').on('submit', function (event) {
+            event.preventDefault();
+            const username = $('#user').val()
+            const password = $('#pass').val()
+            console.log(username, password)
+
+            $.ajax({
+                type: "POST",
+                url: "/signup",
+                data: {
+                    "username": username,
+                    "password": password
+                },
+                success: function (response) {
+                    console.log("Signup Success")
+                    localStorage.setItem("username", username);
+                    localStorage.setItem("password", password);
+                    window.location.replace("/app")
+                },
+                error: function (response) {
+                    console.log("Signup Failed")
+                    console.log(response)
+                    alert("Signup Failed")
+                }
+            })
         })
     </script>
 </body>
